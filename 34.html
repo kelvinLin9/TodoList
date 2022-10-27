@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="todolist.css">
+</head>
+<body>
+    <div class="container">
+        <h1>TODO LIST</h1>
+
+        <div class="card input">
+          <input class="text" type="text" placeholder="請輸入待辦事項" />
+          <a href="#" class="btn_add">+</a>
+        </div>
+
+        <div class="card card_list">
+          <ul class="tab">
+            <li data-tab="all" class="active">全部</li>
+            <li data-tab="work">待完成</li>
+            <li data-tab="down">已完成</li>
+          </ul>
+          <div class="cart_content">
+            <ul class="list">
+              <!-- <li>
+                      <label class="checkbox" for="">
+                        <input type="checkbox" />
+                        <span>丟</span>
+                      </label>
+                      <a href="#" class="delete"></a>
+                    </li>
+                    <li>
+                      <label class="checkbox" for="">
+                        <input type="checkbox" />
+                        <span>去丟</span>
+                      </label>
+                      <a href="#" class="delete"></a>
+                    </li>
+                    <li>
+                      <label class="checkbox" for="">
+                        <input type="checkbox" />
+                        <span>拿去丟</span>
+                      </label>
+                      <a href="#" class="delete"></a>
+                    </li>
+                    <li>
+                      <label class="checkbox" for="">
+                        <input type="checkbox" />
+                        <span>檸檬拿去丟</span>
+                      </label>
+                      <a href="#" class="delete"></a>
+                    </li> -->
+            </ul>
+            <div class="list_footer">
+              <p><span class="todoLength">0</span> 個待完成項目</p>
+              <a href="#" class="btn_clear">清除已完成項目</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script src="20221018.js"></script>
+</body>
+</html>
