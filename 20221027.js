@@ -95,7 +95,7 @@ list.addEventListener('click', (e) => {
 // 刪除已完成
 btnClear.addEventListener('click', () =>{
   data = data.filter(i => i.checked == '')
-  renderData()
+  toggle()
 })
 
 // tab切換
