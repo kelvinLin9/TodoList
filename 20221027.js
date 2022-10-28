@@ -1,11 +1,14 @@
 const txt = document.querySelector('.text')
 const list = document.querySelector('.list')
 const tab = document.querySelector('.tab')
+const tabs = document.querySelectorAll('.tab li')
 const btnAdd = document.querySelector('.btn_add')
 const btnClear = document.querySelector('.btn_clear')
 const todoLength = document.querySelector('.todoLength')
 data = []
 showData = []
+state = 'all'
+
 // 新增
 btnAdd.addEventListener('click', addTodo)
 txt.addEventListener('keyup', (e) => {
@@ -25,7 +28,7 @@ function addTodo() {
   }
   data.push(obj)
   txt.value = ''
-  renderData()
+  toggle()
 }
 
 // 渲染
@@ -86,7 +89,7 @@ list.addEventListener('click', (e) => {
       }
     })
   }
-  renderData()
+  toggle()
 })
 
 // 刪除已完成
@@ -97,21 +100,23 @@ btnClear.addEventListener('click', () =>{
 
 // tab切換
 tab.addEventListener('click', (e) =>{
-  let updateData = []
-  const tabs = document.querySelectorAll('.tab li')
   tabs.forEach((i) => {
     i.classList.remove('active')
   })
   e.target.classList.add('active')
-  if(e.target.getAttribute('data-tab') == 'all'){
-    updateData = data
-  }else if (e.target.getAttribute('data-tab') == 'work'){
-    updateData = data.filter(i => i.checked == '')
-  } else {
-    updateData = data.filter(i => i.checked == 'checked')
-  }
-  renderData(updateData)
+  state = e.target.getAttribute('data-tab')
+  toggle()
 })
 
-
+function toggle() {
+  let updateData = []
+  if(state === 'all'){
+    updateData = data
+  }else if (state === 'work'){
+    updateData = data.filter(i => i.checked === '')
+  } else {
+    updateData = data.filter(i => i.checked === 'checked')
+  }
+  renderData(updateData)
+}
 
