@@ -1,34 +1,34 @@
-const txt = document.querySelector('.text')
+const todoInput = document.querySelector('.text')
 const list = document.querySelector('.list')
 const tab = document.querySelector('.tab')
 const tabs = document.querySelectorAll('.tab li')
 const btnAdd = document.querySelector('.btn_add')
 const btnClear = document.querySelector('.btn_clear')
 const todoLength = document.querySelector('.todoLength')
-data = []
-showData = []
-state = 'all'
+let data = []
+let showData = []
+let state = 'all'
 
 // 新增
 btnAdd.addEventListener('click', addTodo)
-txt.addEventListener('keyup', (e) => {
+todoInput.addEventListener('keyup', (e) => {
   if (e.key == 'Enter'){
     addTodo()
   }
 })
 function addTodo() {
-  if (txt.value.trim() === ''){
+  if (todoInput.value.trim() === ''){
     alert('請輸入代辦事項')
     return
   }
-  obj = {
-    value: txt.value,
-    id: new Date().getTime(),
-    checked: ''
+  let obj = {
+        value: todoInput.value,
+        id: new Date().getTime(),
+        checked: ''
   }
   data.push(obj)
-  txt.value = ''
-  toggle()
+  todoInput.value = ''
+  filterData()
 }
 
 // 渲染
@@ -89,13 +89,13 @@ list.addEventListener('click', (e) => {
       }
     })
   }
-  toggle()
+  filterData()
 })
 
 // 刪除已完成
 btnClear.addEventListener('click', () =>{
   data = data.filter(i => i.checked == '')
-  toggle()
+  filterData()
 })
 
 // tab切換
@@ -105,10 +105,10 @@ tab.addEventListener('click', (e) =>{
   })
   e.target.classList.add('active')
   state = e.target.getAttribute('data-tab')
-  toggle()
+  filterData()
 })
 
-function toggle() {
+function filterData() {
   let updateData = []
   if(state === 'all'){
     updateData = data
