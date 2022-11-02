@@ -13,7 +13,7 @@ let count = 0
 // 新增
 btnAdd.addEventListener('click', addTodo)
 todoInput.addEventListener('keyup', (e) => {
-  if (e.key == 'Enter'){
+  if (e.key === 'Enter'){
     addTodo()
   }
 })
@@ -74,28 +74,25 @@ list.addEventListener('click', (e) => {
   indexOfId = data.findIndex((item)=>{
     return item.id == id
   })
+  console.log(indexOfId)
   if(e.target.getAttribute('data-method') === 'delete') {
     data.splice(indexOfId, 1)
   }else if (e.target.getAttribute('data-method') === 'edit') {
     newValue = prompt('編輯吧!少年!!')
     data[indexOfId].value = newValue
-  }else if(e.target.nodeName == 'INPUT') {
-    data.forEach((item,index) => {
-      if (item.id == id) {
-        if(data[index].checked == ''){
-          data[index].checked = 'checked'
-        } else if(data[index].checked == 'checked') {
-          data[index].checked = ''
-        }
-      }
-    })
+  }else if(e.target.nodeName === 'INPUT') {     
+    if(data[indexOfId].checked === ''){
+      data[indexOfId].checked = 'checked'
+    } else if(data[indexOfId].checked === 'checked') {
+      data[indexOfId].checked = ''
+    }
   }
   filterData()
 })
 
 // 刪除已完成
 btnClear.addEventListener('click', () =>{
-  data = data.filter(i => i.checked == '')
+  data = data.filter(i => i.checked === '')
   filterData()
 })
 
