@@ -8,6 +8,7 @@ const todoLength = document.querySelector('.todoLength')
 let data = []
 let showData = []
 let state = 'all'
+let count = 0
 
 // 新增
 btnAdd.addEventListener('click', addTodo)
@@ -33,19 +34,9 @@ function addTodo() {
 
 // 渲染
 function renderData(updateData) {
+  CalculateToDo()
   let str = ''
-  let count = 0
-  if (updateData){
-    showData = updateData
-  } else{
-    showData = data
-  }
-  data.forEach((i) => {
-    if (i.checked == ''){
-      count ++
-    }
-  })
-  showData.forEach((i) => {
+  updateData.forEach((i) => {
     str += `
       <li>
         <label class="checkbox" for="">
@@ -53,10 +44,10 @@ function renderData(updateData) {
           <span>${i.value}</span>
         </label>
         <a href="#" class="edit">
-          <i class="fa-solid fa-pen" data-id="${i.id}"></i>
+          <i class="fa-solid fa-pen" data-id="${i.id}" data-method="edit"></i>
         </a>
         <a href="#" class="delete">
-          <i class="fa-solid fa-trash" data-id="${i.id}"></i>
+          <i class="fa-solid fa-trash" data-id="${i.id}" data-method="delete"></i>
         </a>
       </li>
     `
@@ -65,25 +56,29 @@ function renderData(updateData) {
   todoLength.innerHTML = count
 }
 
+// 計算未完成待辦
+function CalculateToDo() {
+  count = 0
+  data.forEach((i) => {
+    if (i.checked == ''){
+      count ++
+    }
+  })
+}
+
 // 切換待辦是否完成&編輯&刪除
 list.addEventListener('click', (e) => {
   // 如果只有a標籤裡面有data-id屬性，點input區塊就拿不到屬性值
   let id = e.target.getAttribute('data-id')
   // 先判斷點到的是第幾筆待辦
-  data.forEach((item) => {
-    item.id
+  indexOfId = data.findIndex((item)=>{
+    return item.id == id
   })
-  if(e.target.classList.value == 'fa-solid fa-trash') {
-    console.log(data)
-    console.log(data[0]['id'])
-    data = data.filter(i => i.id != id)
-  }else if (e.target.classList.value == 'fa-solid fa-pen') {
+  if(e.target.getAttribute('data-method') === 'delete') {
+    data.splice(indexOfId, 1)
+  }else if (e.target.getAttribute('data-method') === 'edit') {
     newValue = prompt('編輯吧!少年!!')
-    data.forEach((item,index) => {
-      if (item.id == id) {
-        data[index].value = newValue
-      }
-    })
+    data[indexOfId].value = newValue
   }else if(e.target.nodeName == 'INPUT') {
     data.forEach((item,index) => {
       if (item.id == id) {
