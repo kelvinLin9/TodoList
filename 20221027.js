@@ -69,7 +69,13 @@ function renderData(updateData) {
 list.addEventListener('click', (e) => {
   // 如果只有a標籤裡面有data-id屬性，點input區塊就拿不到屬性值
   let id = e.target.getAttribute('data-id')
+  // 先判斷點到的是第幾筆待辦
+  data.forEach((item) => {
+    item.id
+  })
   if(e.target.classList.value == 'fa-solid fa-trash') {
+    console.log(data)
+    console.log(data[0]['id'])
     data = data.filter(i => i.id != id)
   }else if (e.target.classList.value == 'fa-solid fa-pen') {
     newValue = prompt('編輯吧!少年!!')
