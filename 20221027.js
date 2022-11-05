@@ -34,7 +34,7 @@ function addTodo() {
 
 // 渲染
 function renderData(updateData) {
-  CalculateToDo()
+  calculateToDo()
   let str = ''
   updateData.forEach((i) => {
     str += `
@@ -57,7 +57,7 @@ function renderData(updateData) {
 }
 
 // 計算未完成待辦
-function CalculateToDo() {
+function calculateToDo() {
   count = 0
   data.forEach((i) => {
     if (i.checked == ''){
