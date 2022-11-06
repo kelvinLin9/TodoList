@@ -8,7 +8,6 @@ const todoLength = document.querySelector('.todoLength')
 let data = []
 let showData = []
 let state = 'all'
-let count = 0
 
 // 新增
 btnAdd.addEventListener('click', addTodo)
@@ -53,17 +52,18 @@ function renderData(updateData) {
     `
   })
   list.innerHTML = str
-  todoLength.innerHTML = count
+  todoLength.innerHTML = calculateToDo()
 }
 
 // 計算未完成待辦
 function calculateToDo() {
-  count = 0
+  let count = 0
   data.forEach((i) => {
     if (i.checked == ''){
       count ++
     }
   })
+  return count
 }
 
 // 切換待辦是否完成&編輯&刪除
@@ -74,10 +74,10 @@ list.addEventListener('click', (e) => {
   indexOfId = data.findIndex((item)=>{
     return item.id == id
   })
-  console.log(indexOfId)
-  if(e.target.getAttribute('data-method') === 'delete') {
+  let dataMethod = e.target.getAttribute('data-method')
+  if(dataMethod === 'delete') {
     data.splice(indexOfId, 1)
-  }else if (e.target.getAttribute('data-method') === 'edit') {
+  }else if (dataMethod === 'edit') {
     newValue = prompt('編輯吧!少年!!')
     data[indexOfId].value = newValue
   }else if(e.target.nodeName === 'INPUT') {     
